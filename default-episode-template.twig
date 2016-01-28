@@ -32,8 +32,10 @@
         </table>
             
         {# display related Episodes #}
-        Ähnliche oder zugehörige Episoden:
-            [podlove-related-episodes]
+        {% if episode.relatedEpisodes %}
+            <strong> Ähnliche oder zugehörige Episoden: </strong></br>
+                [podlove-related-episodes]
+        {% endif %}
         
         {# display contributor list #}    
             <strong> Teilnehmer: </strong>
