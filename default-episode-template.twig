@@ -30,12 +30,6 @@
         <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="250"> [podlove-podcast-subscribe-button size="big"] </td></tr>
         </tbody>
         </table>
-            
-        {# display related Episodes #}
-        {% if episode.relatedEpisodes %}
-            <strong> Ähnliche oder zugehörige Episoden: </strong></br>
-                [podlove-related-episodes]
-        {% endif %}
         
         {# display contributor list #}    
             <strong> Teilnehmer: </strong>
@@ -55,6 +49,12 @@
         </tbody>
         </table>
     {% endif %}
+
+{# display related Episodes #}
+    {% if episode.relatedEpisodes %}
+        Ähnliche oder zugehörige Episoden: </br>
+        [podlove-related-episodes]
+    {% endif %}    
     
 {# display title and shownotes #}
     <p> <strong> Shownotes: {{episode.title}} </strong> </p>
