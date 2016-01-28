@@ -2,6 +2,7 @@
 <table style="border-width: 0px;">
     <tbody style="border-width: 0px;">
         {% for contributor in episode.contributors %}
+        {% if contributor.episodes|length >1 %}
         <tr>
             {% if contributor.role == "guest" %}
                 <td style="border-width: 0px; vertical-align:top; text-align: left;">
@@ -34,6 +35,7 @@
                     </td>
             {% endif %}
         </tr>
+        {% endif %}
         {% endfor %}
     </tbody>
 </table>
