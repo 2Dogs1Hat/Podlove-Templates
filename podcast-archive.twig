@@ -1,0 +1,108 @@
+{# Template: podcast-archive template #}
+{# Version: 1.4 #}
+
+{# option.group - define the contributor group to be listed #}
+{# option.role - define the contributor role to be listed #}
+{# option.contributor_column - define the contributor role to be listed #}
+{# option.icon_size - vertical size of episode icon #}
+{# option.avatar_size - vertical size of avatar icon #}
+
+{% import "metaebene-macros" as metaebene %}
+
+{% if option.icon_size %}
+    {% set icon_size = icon.icon_size %}
+{% else %}
+    {% set icon_size = '96' %}
+{% endif %}
+
+{% if option.avatar_size %}
+    {% set avatar_size = option.avatar_size %}
+{% else %}
+    {% set avatar_size = '48' %}
+{% endif %}
+
+<table style="border-width: 0px;">
+    <colgroup>
+        <col id="episode_icon" width="{{ icon_size + 16 }}" />
+        <col id="episode_description" />
+        {% if option.contributor_column %}
+        <col id="episode_contributors" />
+        {% endif %}
+    </colgroup>
+    <tbody style="border-width: 0px;">
+    {% for episode in podcast.episodes %}
+        <tr id="{{ episode.slug }}" class="archive_episode_row">
+            <td style="border-width: 0px;" class="episode_icon">
+                <img src="{{ episode.imageUrlWithFallback }}" width="{{ icon_size }}" height="{{ icon_size }}">
+                {% if option.flattr == "yes" %}
+                    <br/>
+                    {{ flattr.button({ url: episode.url }) }}
+                {% endif %}
+            </td>
+            <td style="border-width: 0px;" class="episode_description">
+                <div class="episode_title"><a href="{{ episode.url }}">{{ episode.title }}</a></div>
+
+                <div class="episode_meta">
+
+                    {{ metaebene.print_date(episode.publicationDate, language) }}<br/>
+                    {{ metaebene.print_duration(episode.duration, language) }}
+
+                </div>
+
+                <div class="episode_subtitle">{{ episode.subtitle }}</div>
+
+            {% if option.contributor_column %}
+            </td>
+            <td>
+            {% endif %}
+
+                {# contributor avatars #}
+                <div class="episode_contributor_avatars">
+                {% for contributor in episode.contributors({group: option.group, role: option.role}) %}
+                    <img src="{{ contributor.avatar.url }}" title="{{ contributor.name }}" height="{{ avatar_size }}" width="{{ avatar_size }}"/ />
+                {% endfor %}
+                </div>
+
+                {# contributor names #}
+                <div class="episode_contributor_names">
+                {% for contributor in episode.contributors({group: option.group, role: option.role}) %}
+                    {{ contributor.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+                </div>
+
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<style type="text/css">
+.archive_episode_row .episode_icon {
+    text-align: left;
+}
+.archive_episode_row .episode_title {
+    color: #0199CA;
+    font-size: larger !important;
+    font-weight: bold !important;
+}
+.archive_episode_row .episode_meta {
+    font-weight: bold !important;
+}
+.archive_episode_row .episode_contributor_names {
+    font-weight: bold !important;
+}
+.archive_episode_row div.episode_contributor_avatars {
+    margin-top: 16px;
+}
+.archive_episode_row div.episode_meta {
+    vertical-align: baseline;
+}
+.archive_episode_row img.tiny_icon {
+    vertical-align: -10%;
+}
+.archive_episode_row td {
+    vertical-align: top;
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+</style>
