@@ -1,24 +1,18 @@
-{% if contributor.role == "guest" %}
-<strong> Gäste zuletzt on Air: </strong> </br>
-    {% else %}
-        {% if contributor.role == "special guest" %}
-        <strong> Gäste zuletzt on Air: </strong> </br>
-        {% else %}
-        {% endif %}
+{% set episodename = episode.title %}
 <table style="border-width: 0px;">
     <tbody style="border-width: 0px;">
         {% for contributor in episode.contributors %}
         <tr>
             {% if contributor.role == "guest" %}
                 <td style="border-width: 0px; vertical-align:top; text-align: left;">
-                    {{ contributor.name }}:
-                </td>
-                    <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                    Weitere Episoden mit {{ contributor.name }}:
                     <ul>
-                    {% for episode in contributor.episodes ({limit: 3}) %}
+                    {% for episode in contributor.episodes ({limit: 4}) %}
+                    {% if episode.title != episodename %}
                         <li>
                         <a href="{{ episode.url }}">{{ episode.title }}</a>
                         </li>
+                    {% endif %}
                     {% endfor %}
                     </ul>
                     </td>
@@ -27,14 +21,14 @@
             <tr>
             {% if contributor.role == "special guest" %}
                 <td style="border-width: 0px; vertical-align:top; text-align: left;">
-                    {{ contributor.name }}:
-                </td>
-                    <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                    Weitere Episoden mit {{ contributor.name }}:
                     <ul>
-                    {% for episode in contributor.episodes ({limit: 3}) %}
+                    {% for episode in contributor.episodes ({limit: 4}) %}
+                    {% if episode.title != episodename %}
                         <li>
                         <a href="{{ episode.url }}">{{ episode.title }}</a>
                         </li>
+                    {% endif %}    
                     {% endfor %}
                     </ul>
                     </td>
@@ -43,4 +37,3 @@
         {% endfor %}
     </tbody>
 </table>
-{% endif %}
