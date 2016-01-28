@@ -1,0 +1,46 @@
+{% if contributor.role == "guest" %}
+<strong> Gäste zuletzt on Air: </strong> </br>
+    {% else %}
+        {% if contributor.role == "special guest" %}
+        <strong> Gäste zuletzt on Air: </strong> </br>
+        {% else %}
+        {% endif %}
+<table style="border-width: 0px;">
+    <tbody style="border-width: 0px;">
+        {% for contributor in episode.contributors %}
+        <tr>
+            {% if contributor.role == "guest" %}
+                <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                    {{ contributor.name }}:
+                </td>
+                    <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                    <ul>
+                    {% for episode in contributor.episodes ({limit: 3}) %}
+                        <li>
+                        <a href="{{ episode.url }}">{{ episode.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    </td>
+            {% endif %}
+            </tr>
+            <tr>
+            {% if contributor.role == "special guest" %}
+                <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                    {{ contributor.name }}:
+                </td>
+                    <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                    <ul>
+                    {% for episode in contributor.episodes ({limit: 3}) %}
+                        <li>
+                        <a href="{{ episode.url }}">{{ episode.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
