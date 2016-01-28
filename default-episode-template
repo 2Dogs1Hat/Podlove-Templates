@@ -1,0 +1,59 @@
+{# display summary date and duration #}
+    <p>{{episode.summary}}<br>
+    <strong> Shownotes: </strong> <a href="{{episode.url}}"> {{episode.url}} </a> <br>
+    
+    {% if not is_feed() %}
+        <strong> Datum: </strong> {{episode.publicationDate}} <strong> Länge: </strong>
+        {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
+        {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </p>
+    {% endif %}
+    
+    {% if is_feed() %}
+        <strong> Datum: </strong> {{episode.publicationDate}} <br>
+        <strong> Länge: </strong>
+        {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
+        {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </p>
+        Ähnliche oder zugehörige Episoden:
+            [podlove-related-episodes]
+    {% endif %}
+
+{# Browser only #}
+    {% if not is_feed() %}
+    
+        {# display web player for episode #}
+            {{ episode.player }}
+
+        {# display download menu for episode #} {# display subscribe button #}
+        <table style="border-width: 0px;">
+        <tbody style="border-width: 0px;">
+        <tr><td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="200"> {% include "@core/shortcode/downloads-select.twig" %} </td>
+        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="250"> [podlove-podcast-subscribe-button size="big"] </td></tr>
+        </tbody>
+        </table>
+            
+        {# display related Episodes #}
+        Ähnliche oder zugehörige Episoden:
+            [podlove-related-episodes]
+        
+        {# display contributor list #}    
+            <strong> Teilnehmer: </strong>
+            [podlove-template template="contribut_home"]
+    {% endif %}
+
+{# display contributor list and subscribe button #}
+    {% if is_feed() %}
+        <strong> Teilnehmer: </strong>
+        [podlove-template template="contribut_feat"]
+        
+        <table style="border-width: 0px;">
+        <tbody style="border-width: 0px;">
+        <tr><td style="border-width: 0px; text-align: left;" valign="top" width="100"></td>
+        <td style="border-width: 0px; text-align: left;" valign="top" width="200">[podlove-podcast-subscribe-button size="medium"]</td>
+        <td style="border-width: 0px; text-align: left;" valign="top" width="100"></td></tr>
+        </tbody>
+        </table>
+    {% endif %}
+    
+{# display title and shownotes #}
+    <p> <strong> Shownotes: {{episode.title}} </strong> </p>
+        <div> [shownotes] </div>
