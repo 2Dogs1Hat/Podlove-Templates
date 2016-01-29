@@ -47,6 +47,11 @@
             <tr>
               <td style="border-width: 0px; vertical-align:top; text-align: left;">
                 {{ contributor.name }}:
+                    {% for service in contributor.services({category: "social"}) %}
+                        <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
+                            {{ service.image.html({width: 16, heigth: 16, alt: service.name}) }}
+                        </a>
+                    {% endfor %}
                   <ul>
                     {% for episode in contributor.episodes %}
                         <li>
