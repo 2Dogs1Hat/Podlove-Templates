@@ -4,22 +4,6 @@
         {% for contributor in episode.contributors %}
         {% if contributor.episodes|length >1 %}
         <tr>
-            {% if contributor.role == "guest" %}
-                <td style="border-width: 0px; vertical-align:top; text-align: left;">
-                    Weitere Episoden mit {{ contributor.name }}:
-                    <ul>
-                    {% for episode in contributor.episodes ({limit: 4}) %}
-                    {% if episode.title != episodename %}
-                        <li>
-                        <a href="{{ episode.url }}">{{ episode.title }}</a>
-                        </li>
-                    {% endif %}
-                    {% endfor %}
-                    </ul>
-                    </td>
-            {% endif %}
-            </tr>
-            <tr>
             {% if contributor.role == "special guest" %}
                 <td style="border-width: 0px; vertical-align:top; text-align: left;">
                     Weitere Episoden mit {{ contributor.name }}:
@@ -30,6 +14,22 @@
                         <a href="{{ episode.url }}">{{ episode.title }}</a>
                         </li>
                     {% endif %}    
+                    {% endfor %}
+                    </ul>
+                    </td>
+            {% endif %}
+            </tr>
+            <tr>
+                {% if contributor.role == "guest" %}
+                <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                    Weitere Episoden mit {{ contributor.name }}:
+                    <ul>
+                    {% for episode in contributor.episodes ({limit: 4}) %}
+                    {% if episode.title != episodename %}
+                        <li>
+                        <a href="{{ episode.url }}">{{ episode.title }}</a>
+                        </li>
+                    {% endif %}
                     {% endfor %}
                     </ul>
                     </td>
