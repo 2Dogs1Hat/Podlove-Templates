@@ -1,1 +1,22 @@
-
+<table style="border-width: 0px;">
+    <tbody style="border-width: 0px;">
+        {% for contributor in podcast.contributors %}
+          {% if contributor.role =! "moderation" %}
+            <tr>
+              <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                {{ contributor.name }}:
+                  <ul>
+                    {% for episode in contributor.episodes %}
+                      {% if episode.title != episodename %}
+                        <li>
+                          <a href="{{ episode.url }}">{{ episode.title }}</a>
+                        </li>
+                      {% endif %}    
+                    {% endfor %}
+                  </ul>
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
