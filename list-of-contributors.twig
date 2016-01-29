@@ -1,0 +1,29 @@
+<strong>2Dogs1Hat Team</strong>
+[podlove-template template="list-of-team"]
+
+<strong>Podcast Gäste</strong>
+<table style="border-width: 0px;">
+    <tbody style="border-width: 0px;">
+        {% for contributor in podcast.contributors ({scope: "global-active"}) %}
+        {% if contributor.id != "team" %}
+            <tr>
+              <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                {{ contributor.name }}:
+                    {% for service in contributor.services({category: "social"}) %}
+                        <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
+                            {{ service.image.html({width: 16, heigth: 16, alt: service.name}) }}
+                        </a>
+                    {% endfor %}
+                  <ul>
+                    {% for episode in contributor.episodes %}
+                        <li>
+                          <a href="{{ episode.url }}">{{ episode.title }}</a>
+                        </li>
+                    {% endfor %}
+                  </ul>
+              </td>
+            </tr>
+        {% endif %}    
+        {% endfor %}
+    </tbody>
+</table>
