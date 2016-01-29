@@ -1,6 +1,8 @@
 {# display summary date and duration #}
-    <p>{{episode.summary}}<br>
-    <strong> Shownotes: </strong> <a href="{{episode.url}}"> {{episode.url}} </a> <br>
+    <p> <strong>{{episode.subtitle}} </strong> </br>
+    </br>
+        {{episode.summary}} </br>
+    </br>
     
     {% if not is_feed() %}
         <strong> Datum: </strong> {{episode.publicationDate}} <strong> Länge: </strong>
