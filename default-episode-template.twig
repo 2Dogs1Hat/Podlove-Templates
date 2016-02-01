@@ -11,12 +11,11 @@
     {% endif %}
     
     {% if is_feed() %}
-        <strong> Datum: </strong> {{episode.publicationDate}} <br>
+        <strong> Shownotes: </strong> <a href= {{episode.url}} target="_blank">Link</a> </br>
+        <strong> Datum: </strong> {{episode.publicationDate}} </br>
         <strong> Länge: </strong>
         {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
         {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </p>
-        Ähnliche oder zugehörige Episoden:
-            [podlove-related-episodes]
     {% endif %}
 
 {# Browser only #}
