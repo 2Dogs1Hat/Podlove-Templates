@@ -5,15 +5,18 @@
     </br>
     
     {% if not is_feed() %}
-        <strong> Datum: </strong> {{episode.publicationDate}} <strong> Länge: </strong>
+        <strong> Aufgenommen: </strong> {{episode.recordingDate}} </br>
+        <strong> Veröffentlicht: </strong> {{episode.publicationDate}} </br>
+        <strong> Dauer: </strong>
         {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
         {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </p>
     {% endif %}
     
     {% if is_feed() %}
         <strong> Shownotes: </strong> <a href= {{episode.url}} target="_blank">Link</a> </br>
-        <strong> Datum: </strong> {{episode.publicationDate}} </br>
-        <strong> Länge: </strong>
+        <strong> Aufgenommen: </strong> {{episode.recordingDate}} </br>
+        <strong> Veröffentlicht: </strong> {{episode.publicationDate}} </br>
+        <strong> Dauer: </strong>
         {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
         {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </p>
     {% endif %}
@@ -28,7 +31,8 @@
         <table style="border-width: 0px;">
         <tbody style="border-width: 0px;">
         <tr><td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="200"> {% include "@core/shortcode/downloads-select.twig" %} </td>
-        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="250"> [podlove-podcast-subscribe-button size="big"] </td></tr>
+        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="250"> {{ podcast.subscribeButton({format: 'rectangle', color: '#dd3333', style: 'outline', size: 'big'}) }}
+ </td></tr>
         </tbody>
         </table>
         
@@ -41,14 +45,6 @@
     {% if is_feed() %}
         <strong> Teilnehmer: </strong>
         [podlove-template template="contribut_feat"]
-        
-        <table style="border-width: 0px;">
-        <tbody style="border-width: 0px;">
-        <tr><td style="border-width: 0px; text-align: left;" valign="top" width="100"></td>
-        <td style="border-width: 0px; text-align: left;" valign="top" width="200">[podlove-podcast-subscribe-button size="medium"]</td>
-        <td style="border-width: 0px; text-align: left;" valign="top" width="100"></td></tr>
-        </tbody>
-        </table>
     {% endif %}
 
 {# display title and shownotes #}
