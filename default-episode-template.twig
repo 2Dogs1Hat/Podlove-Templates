@@ -1,11 +1,11 @@
 {# display summary date and duration #}
     <p> <strong>{{episode.subtitle}} </strong> </br>
     </br>
-        {{episode.summary}} </br>
-    </br>
-    
+    {{episode.summary}} </br></p>
+
+{# display episode meta #}
     {% if not is_feed() %}
-        <strong> Aufgenommen: </strong> {{episode.recordingDate}} </br>
+        <p> <strong> Aufgenommen: </strong> {{episode.recordingDate}} </br>
         <strong> Veröffentlicht: </strong> {{episode.publicationDate}} </br>
         <strong> Dauer: </strong>
         {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
@@ -13,7 +13,7 @@
     {% endif %}
     
     {% if is_feed() %}
-        <strong> Shownotes: </strong> <a href= {{episode.url}} target="_blank">Link</a> </br>
+        <p> <strong> Shownotes: </strong> <a href= {{episode.url}} target="_blank">Link</a> </br>
         <strong> Aufgenommen: </strong> {{episode.recordingDate}} </br>
         <strong> Veröffentlicht: </strong> {{episode.publicationDate}} </br>
         <strong> Dauer: </strong>
@@ -21,7 +21,7 @@
         {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </p>
     {% endif %}
 
-{# Browser only #}
+{# display web player #}
     {% if not is_feed() %}
     
         {# display web player for episode #}
@@ -30,23 +30,38 @@
         {# display download menu for episode #} {# display subscribe button #}
         <table style="border-width: 0px;">
         <tbody style="border-width: 0px;">
-        <tr><td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="200"> {% include "@core/shortcode/downloads-select.twig" %} </td>
-        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="250"> {{ podcast.subscribeButton({format: 'rectangle', color: '#EE7600', style: 'outline', size: 'big'}) }}
- </td></tr>
+        <tr>
+        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="200"> {% include "@core/shortcode/downloads-select.twig" %} </td>
+        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="200"> {{ podcast.subscribeButton({format: 'rectangle', color: '#EE7600', style: 'outline', size: 'big'}) }}</td>
+        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="50"> <a href=http://creativecommons.org/licenses/by-nc-nd/4.0><img src=http://www.2dogs1hat.de/wp-content/plugins/podlove-podcasting-plugin-for-wordpress/images/cc/0_0.png alt="Licence"> </a></td>
+        </tr>
         </tbody>
         </table>
-        
-        {# display contributor list #}    
-            <strong> Teilnehmer: </strong>
-            [podlove-template template="contribut_home"]
     {% endif %}
 
-{# display contributor list and subscribe button #}
+{# display licence #}
+{% if not is_feed() %}
+    <p>This work is licensed under a </br>
+    <a href=http://creativecommons.org/licenses/by-nc-nd/4.0>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a></p>
+{% endif %}
+
+{% if is_feed() %}
+<p>This work is licensed under a </br>
+    <a href=http://creativecommons.org/licenses/by-nc-nd/4.0>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a></p>
+    <a href=http://creativecommons.org/licenses/by-nc-nd/4.0>
+    <img src=http://www.2dogs1hat.de/wp-content/plugins/podlove-podcasting-plugin-for-wordpress/images/cc/0_0.png alt="Licence"></a>
+{% endif %}
+
+{# display contributor list #}
+<strong> Teilnehmer: </strong>
+    {% if not is_feed() %}
+        [podlove-template template="contribut_home"]
+    {% endif %}
+
     {% if is_feed() %}
-        <strong> Teilnehmer: </strong>
         [podlove-template template="contribut_feat"]
     {% endif %}
 
 {# display title and shownotes #}
-    <p> <strong> Shownotes: {{episode.title}} </strong> </p>
+    <p> <strong> Shownotes: <a href= {{episode.url}} target="_blank">{{episode.title}}</a> </strong> </p>
         <div> [shownotes] </div>
