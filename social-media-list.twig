@@ -1,3 +1,18 @@
+{# display Feed URLs #}
+<p> <strong> Standard Feed URL: </strong> </br>
+        <a href= http://www.2dogs1hat.de/podcast/feed/m4a/ target="_blank">http://www.2dogs1hat.de/podcast/feed/m4a/</a> </br>
+        <strong> Alternative Feed URL: </strong> </br>
+        <a href= http://www.2dogs1hat.de/podcast/feed/mp3/ target="_blank">http://www.2dogs1hat.de/podcast/feed/mp3/</a> </br> </p>
+
+{# display related Episodes #}
+    {% if episode.relatedEpisodes %}
+        Ähnliche oder zugehörige Episoden: </br>
+        [podlove-related-episodes]
+    {% endif %}  
+
+{# Gast auch on Air bei Episode #}
+[podlove-template template="related-episodes"]
+
 {% if is_feed() %}
 <table style="border-width: 0px;">
 <tbody style="border-width: 0px;">
