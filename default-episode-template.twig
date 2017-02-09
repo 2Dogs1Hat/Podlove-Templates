@@ -5,14 +5,14 @@
 
 {# display episode meta #}
  <p>
-    {% if is_feed() %}
-        <strong> Shownotes: </strong> <a href= {{episode.url}} target="_blank">Link</a> </br>
-    {% endif %}    
         <strong> Aufgenommen: </strong> {{episode.recordingDate}} </br>
         <strong> Veröffentlicht: </strong> {{episode.publicationDate}} </br>
         <strong> Dauer: </strong>
         {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
-        {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %}
+        {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </br>
+    {% if is_feed() %}
+        <strong> Shownotes: </br></strong> <a href= {{episode.url}} target="_blank">{{episode.url}}</a> </br>
+    {% endif %} 
 </p>
 
 {# display web player #}
@@ -22,12 +22,12 @@
             {{ episode.player }}
 
         {# display download menu for episode #} {# display subscribe button #}
-        <table style="border-width: 0px;">
-        <tbody style="border-width: 0px;">
+        <table>
+        <tbody>
         <tr>
-        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="200"> {% include "@core/shortcode/downloads-select.twig" %} </td>
-        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="200"> {{ podcast.subscribeButton({format: 'rectangle', color: '#EE7600', style: 'outline', size: 'big'}) }}</td>
-        <td style="border-width: 0px; vertical-align: top; text-align: center;" valign="top" width="50"> <a href=http://creativecommons.org/licenses/by-nc-nd/4.0><img src=http://www.2dogs1hat.de/wp-content/plugins/podlove-podcasting-plugin-for-wordpress/images/cc/0_0.png alt="Licence"> </a></td>
+        <td style="vertical-align:top; text-align: left;"> {% include "@core/shortcode/downloads-select.twig" %} </td>
+        <td style="vertical-align:top; text-align: left;"> {{ podcast.subscribeButton({format: 'rectangle', color: '#EE7600', style: 'outline', size: 'big'}) }}</td>
+        <td style="vertical-align:top; text-align: left;"> <a href=http://creativecommons.org/licenses/by-nc-nd/4.0><img src=http://www.2dogs1hat.de/wp-content/plugins/podlove-podcasting-plugin-for-wordpress/images/cc/0_0.png alt="Licence"> </a></td>
         </tr>
         </tbody>
         </table>
@@ -59,4 +59,4 @@
 
 {# display title and shownotes #}
     <p> <strong> Shownotes: <a href= {{episode.url}} target="_blank">{{episode.title}}</a> </strong> </p>
-        <div> [shownotes] </div>
+        <div>[shownotes]</div>
