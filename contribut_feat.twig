@@ -1,23 +1,23 @@
+<p>On Air:</p>
 <table style="border-width: 0px;">
     <tbody style="border-width: 0px;">
-            {% for contributor in episode.contributors %}
+            {% for contributor in episode.contributors({group:"on_air"}) %}
                 <tr>
                     <td width="10%" style="border-width: 0px; vertical-align:top; text-align: left;">
                         {{ contributor.image.html({width: 50, heigth: 50, alt: contributor.name, title: contributor.name}) }}
                     </td>
-                    <td width="40%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                    <td width="20%" style="border-width: 0px; vertical-align:top; text-align: left;">
                         <strong>{{ contributor.name }}</strong>
                         <strong></br>{{ contributor.role }}</strong>
-                        <strong></br>{{ contributor.group }}</strong>
                     </td>
-                    <td width="30%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                    <td width="40%" style="border-width: 0px; vertical-align:top; text-align: left;">
                         {% for service in contributor.services({category: "social"}) %}
                             <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
                                 {{ service.image.html({width: 25, heigth: 25, alt: service.name}) }}
                             </a>
                         {% endfor %}
                     </td>
-                    <td width="20%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                    <td width="30%" style="border-width: 0px; vertical-align:top; text-align: left;">
                         {% for service in contributor.services({category: "donation"}) %}
                             <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
                                 {{ service.image.html({width: 25, heigth: 25, alt: service.name}) }}
@@ -28,3 +28,69 @@
             {% endfor %}
     </tbody>
 </table>
+
+{% if episode.contributors({group:"support"})|length > 0 %}
+<p>Support:</p>
+<table style="border-width: 0px;">
+    <tbody style="border-width: 0px;">
+            {% for contributor in episode.contributors({group:"support"}) %}
+                <tr>
+                    <td width="10%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                        {{ contributor.image.html({width: 50, heigth: 50, alt: contributor.name, title: contributor.name}) }}
+                    </td>
+                    <td width="20%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                        <strong>{{ contributor.name }}</strong>
+                        <strong></br>{{ contributor.role }}</strong>
+                    </td>
+                    <td width="40%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                        {% for service in contributor.services({category: "social"}) %}
+                            <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
+                                {{ service.image.html({width: 25, heigth: 25, alt: service.name}) }}
+                            </a>
+                        {% endfor %}
+                    </td>
+                    <td width="30%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                        {% for service in contributor.services({category: "donation"}) %}
+                            <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
+                                {{ service.image.html({width: 25, heigth: 25, alt: service.name}) }}
+                            </a>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if episode.contributors({group:"project"})|length > 0 %}
+<p>Projekt:</p>
+<table style="border-width: 0px;">
+    <tbody style="border-width: 0px;">
+            {% for contributor in episode.contributors({group:"project"}) %}
+                <tr>
+                    <td width="10%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                        {{ contributor.image.html({width: 50, heigth: 50, alt: contributor.name, title: contributor.name}) }}
+                    </td>
+                    <td width="20%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                        <strong>{{ contributor.name }}</strong>
+                        <strong></br>{{ contributor.role }}</strong>
+                    </td>
+                    <td width="40%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                        {% for service in contributor.services({category: "social"}) %}
+                            <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
+                                {{ service.image.html({width: 25, heigth: 25, alt: service.name}) }}
+                            </a>
+                        {% endfor %}
+                    </td>
+                    <td width="30%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                        {% for service in contributor.services({category: "donation"}) %}
+                            <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
+                                {{ service.image.html({width: 25, heigth: 25, alt: service.name}) }}
+                            </a>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+    </tbody>
+</table>
+{% endif %}
