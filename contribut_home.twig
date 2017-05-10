@@ -23,6 +23,16 @@
                                 {{ service.image.html({width: 50, heigth: 50, alt: service.name}) }}
                             </a>
                         {% endfor %}
+                        {% if contributor.flattr %}
+    			            <br/>
+    			            <a target="_blank"
+    				            class="FlattrButton"
+    				            title="Flattr {{ contributor.name }}"
+    				            rel="flattr;uid:{{ contributor.flattr }};button:compact;popout:0"
+    				            href="{{ contributor.flattr_url }}">
+    					        Flattr {{ contributor.name }}
+    			            </a>
+    		            {% endif %}
                     </td>
                 </tr>
             {% endfor %}
@@ -55,6 +65,16 @@
                                 {{ service.image.html({width: 50, heigth: 50, alt: service.name}) }}
                             </a>
                         {% endfor %}
+                        {% if contributor.flattr %}
+    			            <br/>
+    			            <a target="_blank"
+    				            class="FlattrButton"
+    				            title="Flattr {{ contributor.name }}"
+    				            rel="flattr;uid:{{ contributor.flattr }};button:compact;popout:0"
+    				            href="{{ contributor.flattr_url }}">
+    					        Flattr {{ contributor.name }}
+    			            </a>
+    		            {% endif %}
                     </td>
                 </tr>
             {% endfor %}
