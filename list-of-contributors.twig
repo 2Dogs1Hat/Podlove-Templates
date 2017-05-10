@@ -4,28 +4,30 @@
         {% if contributor.id != "team" %}
         {% if contributor.id != "project" %}
             <tr>
-            <td style="border-width: 0px; vertical-align:top; text-align: left;">
-                {{ contributor.image.html({width: 50, heigth: 50, alt: contributor.name, title: contributor.name}) }}
+            <td width="10%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                {{ contributor.image.html({width: 100, heigth: 100, alt: contributor.name, title: contributor.name}) }}
             </td>
-            <td style="border-width: 0px; vertical-align:top; text-align: left;">
+            <td width="40%" style="border-width: 0px; vertical-align:top; text-align: left;">
                 {{ contributor.name }}:
-                    {% for service in contributor.services({category: "social"}) %}
-                        <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
-                            {{ service.image.html({width: 16, heigth: 16, alt: service.name}) }}
-                        </a>
-                    {% endfor %}
-                    {% for service in contributor.services({category: "donation"}) %}
-                        <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
-                            {{ service.image.html({width: 16, heigth: 16, alt: service.name}) }}
-                        </a>
-                    {% endfor %}
-                  <ul>
                     {% for episode in contributor.episodes %}
                         <li>
                           <a href="{{ episode.url }}">{{ episode.title }}</a>
                         </li>
                     {% endfor %}
-                  </ul>
+            </td>
+            <td width="30%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                    {% for service in contributor.services({category: "social"}) %}
+                        <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
+                            {{ service.image.html({width: 50, heigth: 50, alt: service.name}) }}
+                        </a>
+                    {% endfor %}
+            </td>
+            <td width="20%" style="border-width: 0px; vertical-align:top; text-align: left;">
+                    {% for service in contributor.services({category: "donation"}) %}
+                        <a target="_blank" title="{{ service.title }}" href="{{ service.profileUrl }}">
+                            {{ service.image.html({width: 50, heigth: 50, alt: service.name}) }}
+                        </a>
+                    {% endfor %}
               </td>
             </tr>
         {% endif %} 
