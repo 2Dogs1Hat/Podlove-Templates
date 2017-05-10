@@ -3,6 +3,9 @@
         {% for contributor in podcast.contributors ({scope: "global-active"}) %}
         {% if contributor.id != "team" %}
             <tr>
+            <td style="border-width: 0px; vertical-align:top; text-align: left;">
+                {{ contributor.image.html({width: 50, heigth: 50, alt: contributor.name, title: contributor.name}) }}
+            </td>
               <td style="border-width: 0px; vertical-align:top; text-align: left;">
                 {{ contributor.name }}:
                     {% for service in contributor.services({category: "social"}) %}
