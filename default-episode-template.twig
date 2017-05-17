@@ -1,15 +1,11 @@
 {# NOT FEED display summary date and duration #}
 
 {% if not is_feed() %}
+<strong>{{episode.subtitle}} </strong> </br> </br>
 <table style="border-width: 0px;">
     <tbody style="border-width: 0px;">
         <tr>
             <td style="border-width: 0px; vertical-align:top; text-align: left;">
-            <img src="{{ episode.image({fallback: true}).url }}" width="250" height="250">
-            </td>
-            <td style="border-width: 0px; vertical-align:top; text-align: left;">
-            <strong>{{episode.subtitle}} </strong> </br>
-            </br>
             {{episode.summary}} </br>
             </br>
             
@@ -26,6 +22,9 @@
         
         <p>This work is licensed under a </br>
         <a href=http://creativecommons.org/licenses/by-nc-nd/4.0>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a></br></p>
+            </td>
+            <td style="border-width: 0px; vertical-align:top; text-align: left;">
+            <img src="{{ episode.image({fallback: true}).url }}" width="250" height="250">
             </td>
         </tr>
     </tbody>
