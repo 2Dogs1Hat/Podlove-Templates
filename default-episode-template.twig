@@ -1,21 +1,68 @@
-{# display summary date and duration #}
-    <p> <strong>{{episode.subtitle}} </strong> </br>
-    </br>
-    {{episode.summary}} </br></p>
+{# NOT FEED display summary date and duration #}
 
-{# display episode meta #}
+{% if not is_feed() %}
+<table style="border-width: 0px;">
+    <tbody style="border-width: 0px;">
+        <tr>
+            <td style="border-width: 0px; vertical-align:top; text-align: left;">
+            <img src="{{ episode.image({fallback: true}).url }}" width="250" height="250">
+            </td>
+            <td style="border-width: 0px; vertical-align:top; text-align: left;">
+            <strong>{{episode.subtitle}} </strong> </br>
+            </br>
+            {{episode.summary}} </br>
+            </br>
+            
+            {# display episode meta #}
+            
+        <strong> Aufgenommen: </strong> {{episode.recordingDate}} </br>
+        <strong> Veröffentlicht: </strong> {{episode.publicationDate}} </br>
+        <strong> Dauer: </strong>
+        {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
+        {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </br>
+        </br>
+        
+        {# display licence #}
+        
+        <p>This work is licensed under a </br>
+        <a href=http://creativecommons.org/licenses/by-nc-nd/4.0>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a></br></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+
+
+{# FEED display summary date and duration #}
+
+{% if is_feed() %}
+<strong>{{episode.title}} </strong> </br> </br> {{episode.subtitle}} </br> </br>
+    <table style="border-width: 0px;">
+    <tbody style="border-width: 0px;">
+        <tr>
+            <td style="border-width: 0px; vertical-align:top; text-align: left;">
+    <img src="{{ episode.image({fallback: true}).url }}" width="125" height="125" style="float:left; margin-right: 15px;">
+    <p> {{episode.summary}} </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+            {# display episode meta #}
+            
  <p>
         <strong> Aufgenommen: </strong> {{episode.recordingDate}} </br>
         <strong> Veröffentlicht: </strong> {{episode.publicationDate}} </br>
         <strong> Dauer: </strong>
         {% if episode.duration.hours >= 1 %} {{episode.duration.hours}} Std.{% endif %}
         {% if episode.duration.minutes >= 1 %} {{episode.duration.minutes +1 }} Min.{% endif %} </br>
-    {% if is_feed() %}
         <strong> Shownotes: </br></strong> <a href= {{episode.url}} target="_blank">{{episode.url}}</a> </br>
-    {% endif %} 
 </p>
+{% endif %}
+
 
 {# display web player #}
+
     {% if not is_feed() %}
     
         {# display web player for episode #}
@@ -33,11 +80,8 @@
         </table>
     {% endif %}
 
+
 {# display licence #}
-{% if not is_feed() %}
-    <p>This work is licensed under a </br>
-    <a href=http://creativecommons.org/licenses/by-nc-nd/4.0>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a></br></p>
-{% endif %}
 
 {% if is_feed() %}
 <p>This work is licensed under a </br>
@@ -47,7 +91,9 @@
 </p>
 {% endif %}
 
+
 {# display contributor list #}
+
 <strong> Teilnehmer </strong>
     {% if not is_feed() %}
         [podlove-template template="contribut_home"]
@@ -57,6 +103,8 @@
         [podlove-template template="contribut_feat"]
     {% endif %}
 
+
 {# display title and shownotes #}
+
     <p> <strong> Shownotes: <a href= {{episode.url}} target="_blank">{{episode.title}}</a> </strong> </p>
         <div>[shownotes]</div>
